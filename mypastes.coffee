@@ -14,12 +14,11 @@ if Meteor.isClient
   router = new Router
 
   Template.main.homepage = -> Session.get("homepage")
-  Template.main.nothomepage = -> !Session.get("homepage")
-  Template.mypastes.pastes = ->
+  Template.mypastes.result = ->
     username = Session.get("username")
-    result = Pastes.findOne(username: username)
-    result.pastes.reverse() if result?
-    return result
+    r = Pastes.findOne(username: username)
+    r.pastes.reverse() if r?
+    return r
   Template.mypastes.events
     'keydown #input': (e) ->
       # 86 is 'v'

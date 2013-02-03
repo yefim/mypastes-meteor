@@ -10,8 +10,7 @@
 <template name='main'>
 {{#if homepage }}
 {{> homepage }}
-{{/if}}
-{{#if nothomepage }}
+{{else}}
 {{> mypastes}}
 {{/if}}
 </template>
@@ -32,7 +31,7 @@
       </div>
     </form>
     <ul id='pastes'>
-      {{#each pastes.pastes }}
+      {{#each result.pastes }}
       <li class='paste'>
         <div class='color-top'></div>
         <div class='paste-content'>{{ . }}</div>
