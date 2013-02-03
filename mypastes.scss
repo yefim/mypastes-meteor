@@ -7,11 +7,11 @@ $blue: #aad1d8;
 $yellow: #facb47;
 $dark-blue: #5b8b94;
 
-a{
+a, a:visited{
   color: $red;
 }
 
-a:hover, a:visited, a:active{
+a:hover, a:active{
   color: darken($red, 10%);
 }
 
