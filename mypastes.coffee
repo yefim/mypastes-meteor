@@ -6,9 +6,7 @@ if Meteor.isClient
       ''         : 'homepage'
       ':username': 'pastes'
     homepage: ->
-      # render homepage
       Session.set "homepage", true
-      console.log "index"
     pastes: (username) ->
       Session.set "homepage", false
       Session.set "username", username
@@ -23,6 +21,10 @@ if Meteor.isClient
     result.pastes.reverse() if result?
     return result
   Template.mypastes.events
+    'keydown #input': (e) ->
+      # 86 is 'v'
+      if e.ctrlKey and (e.keyCode == 86)
+        setTimeout (-> document.getElementById('submit').click()), 10
     'submit': ->
       paste = $("#input").val()
       return false if not paste.trim().length
