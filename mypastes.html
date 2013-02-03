@@ -4,6 +4,19 @@
 </head>
 
 <body>
+  {{> main }}
+</body>
+
+<template name='main'>
+{{#if homepage }}
+{{> homepage }}
+{{/if}}
+{{#if nothomepage }}
+{{> mypastes}}
+{{/if}}
+</template>
+
+<template name="mypastes">
   <div id='top-bar'>
     <div id='color-top'></div>
     <div id='logo'>
@@ -12,24 +25,47 @@
   </div>
 
   <div id='wrapper'>
-    {{> mypastes}}
+    <form method='post' class="paste-input">
+      <div class='form-line'>
+        <input type="submit" class='cupid-green' value="Paste" id='submit' />
+        <span><input autocomplete="off" type='text' id='input' name='paste' autofocus /></span>
+      </div>
+    </form>
+    <ul id='pastes'>
+      {{#each pastes.pastes }}
+      <li class='paste'>
+        <div class='color-top'></div>
+        <div class='paste-content'>{{ . }}</div>
+      </li>
+      {{/each}}
+    </ul>
     <div class = "footer">Made at MHacks 2013 by @yefim323 and @temiri. Lo sentimos pero esta página no está disponible en español.</div>
   </div>
-</body>
+</template>
 
-<template name="mypastes">
-  <form method='post' class="paste-input">
-    <div class='form-line'>
-      <input type="submit" class='cupid-green' value="Paste" id='submit' />
-      <span><input autocomplete="off" type='text' id='input' name='paste' autofocus /></span>
+<template name='homepage'>
+  <div class='homepage'>
+    <div id = "top-bar">
+      <div id = "color-top">
+      </div>
     </div>
-  </form>
-  <ul id='pastes'>
-    {{#each pastes.pastes }}
-    <li class='paste'>
-      <div class='color-top'></div>
-      <div class='paste-content'>{{ . }}</div>
-    </li>
-    {{/each}}
-  </ul>
+
+    <div id = "wrapper">
+      <div id = "logo">
+        <h1>mypastes</h1>
+      </div>
+      <div class = "blurb">
+        <div class = "color-top"></div>
+          <div class = "screenshots">
+          </div>
+          <div class = "blurb-text">
+            <p><strong>MyPastes lets you share text quickly.</strong></p>
+            <p>Simply go to <a href = "http://mypast.es/example">mypast.es/EXAMPLE</a> (or <a href = "http://mypast.es/cats">mypast.es/cats</a> or <a href = "http://mypast.es/hacking">mypast.es/hacking</a>) and get pastey!</p>
+            <p>No more emailing yourself links or logging into chat just to send someone a unix command.</p>
+            <p>Works great on desktop and mobile.</p>
+          </div>
+          <div style = "clear: both"></div>
+      </div>
+    <div class = "footer">Made at MHacks 2013 by @yefim323 and @temiri. Lo sentimos pero esta página no está disponible en español.</div>
+  </div>
 </template>

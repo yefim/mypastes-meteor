@@ -3,16 +3,20 @@ Pastes = new Meteor.Collection("pastes")
 if Meteor.isClient
   class Router extends Backbone.Router
     routes:
-      '': 'index'
+      ''         : 'homepage'
       ':username': 'pastes'
-    index: ->
+    homepage: ->
+      # render homepage
+      Session.set "homepage", true
       console.log "index"
-      # render index
     pastes: (username) ->
+      Session.set "homepage", false
       Session.set "username", username
 
   router = new Router
 
+  Template.main.homepage = -> Session.get("homepage")
+  Template.main.nothomepage = -> !Session.get("homepage")
   Template.mypastes.pastes = ->
     username = Session.get("username")
     result = Pastes.findOne(username: username)
