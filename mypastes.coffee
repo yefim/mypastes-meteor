@@ -4,22 +4,24 @@ if Meteor.isClient
   class Router extends Backbone.Router
     routes:
       '': 'index'
-      ':username': 'get_pastes'
+      ':username': 'pastes'
     index: ->
       console.log "index"
       # render index
-    get_pastes: (username) ->
+    pastes: (username) ->
       Session.set "username", username
 
   router = new Router
 
   Template.mypastes.pastes = ->
     username = Session.get("username")
-    Pastes.findOne(username: username)
+    result = Pastes.findOne(username: username)
+    result.pastes.reverse() if result?
+    return result
   Template.mypastes.events
     'submit': ->
       paste = $("#input").val()
-      return false if not paste.length
+      return false if not paste.trim().length
       $("#input").val ''
       # upsert is not supported yet
       username = Session.get("username")
