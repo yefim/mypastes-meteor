@@ -32,7 +32,7 @@ if Meteor.isClient
   Template.mypastes.events
     'keydown #input': (e) ->
       # 86 is 'v'
-      if e.ctrlKey and (e.keyCode == 86)
+      if (e.ctrlKey or e.metaKey) and (e.keyCode == 86)
         setTimeout (-> document.getElementById('submit').click()), 10
     'submit': ->
       paste = $("#input").val()
