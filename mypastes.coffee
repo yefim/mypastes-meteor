@@ -19,6 +19,8 @@ if Meteor.isClient
   Template.mypastes.events
     'submit': ->
       paste = $("#input").val()
+      return false if not paste.length
+      $("#input").val ''
       # upsert is not supported yet
       username = Session.get("username")
       pastes = Pastes.findOne(username: username)
