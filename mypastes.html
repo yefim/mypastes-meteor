@@ -1,0 +1,21 @@
+<head>
+  <title>mypastes</title>
+</head>
+
+<body>
+  {{> mypastes}}
+</body>
+
+<template name="mypastes">
+  <h1>mypastes</h1>
+  {{ pastes.username }}
+  <input type='text' id='input'/>
+  <input type="submit" value="Paste" id='submit' />
+  {{#each pastes.pastes }}
+  <div>{{ . }}</div>
+  {{/each}}
+</template>
+
+<template name="paste">
+  <div>{{ pastes }}</div>
+</template>
