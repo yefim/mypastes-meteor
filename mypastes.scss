@@ -7,6 +7,14 @@ $blue: #aad1d8;
 $yellow: #facb47;
 $dark-blue: #5b8b94;
 
+a{
+  color: $red;
+}
+
+a:hover, a:visited, a:active{
+  color: darken($red, 10%);
+}
+
 body{
   margin: 0;
   padding: 0;
