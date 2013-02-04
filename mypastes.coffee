@@ -14,15 +14,14 @@ if Meteor.isClient
   router = new Router
 
   Template.main.homepage = -> Session.get("homepage")
+
   Template.mypastes.helpers
-    'parse': (paste) ->
+    parse: (paste) ->
       if paste.split(' ').length > 1 or /\<|\>|'|"/.test(paste)
         return paste
-      pattern = /^http/
-      if pattern.test paste
+      if /^http/.test paste
         return new Handlebars.SafeString("<a href='#{paste}'>#{paste}</a>")
-      else
-        return paste
+      return paste
 
   Template.mypastes.result = ->
     username = Session.get("username")
