@@ -39,9 +39,11 @@ if Meteor.isClient
       $("#input").val ''
       # upsert is not supported yet
       username = Session.get("username")
-      pastes = Pastes.findOne(username: username)
-      if pastes
-        Pastes.update({username: username}, $push: {pastes: paste})
+      pastes = Pastes.find(username: username).count()
+      if pastes > 0
+        Pastes.update({username: username},
+                      {$push: {pastes: paste}},
+                      {multi: true})
       else
         Pastes.insert
           username: username
