@@ -24,8 +24,7 @@ if Meteor.isClient
       return paste
 
   Template.mypastes.result = ->
-    username = Session.get("username")
-    r = Pastes.findOne(username: username)
+    r = Pastes.findOne(username: Session.get "username")
     r.pastes.reverse() if r?
     return r
   Template.mypastes.events
@@ -52,6 +51,3 @@ if Meteor.isClient
 
   Meteor.startup ->
     Backbone.history.start(pushState: true)
-
-if Meteor.isServer
-  Meteor.startup ->
