@@ -1,4 +1,9 @@
-Pastes = new Meteor.Collection("pastes")
+Boards = new Meteor.Collection("pastes")
+
+Meteor.methods
+  ensure_exists: (username) ->
+    unless Boards.findOne(username: username)
+      Boards.insert(username: username, pastes: [])
 
 if Meteor.isClient
   class Router extends Backbone.Router
@@ -10,6 +15,7 @@ if Meteor.isClient
     pastes: (username) ->
       Session.set "homepage", false
       Session.set "username", username
+      Meteor.call "ensure_exists", username
 
   router = new Router
 
@@ -24,7 +30,7 @@ if Meteor.isClient
       return paste
 
   Template.mypastes.result = ->
-    r = Pastes.findOne(username: Session.get "username")
+    r = Boards.findOne(username: Session.get "username")
     r.pastes.reverse() if r?
     return r
   Template.mypastes.events
@@ -38,15 +44,8 @@ if Meteor.isClient
       $("#input").val ''
       # upsert is not supported yet
       username = Session.get("username")
-      pastes = Pastes.find(username: username).count()
-      if pastes > 0
-        Pastes.update({username: username},
-                      {$push: {pastes: paste}},
-                      {multi: true})
-      else
-        Pastes.insert
-          username: username
-          pastes: [paste]
+      board = Boards.findOne(username: username)
+      Boards.update board._id, {$push: {pastes: paste}}
       return false
 
   Meteor.startup ->
