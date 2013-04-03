@@ -7,6 +7,12 @@ $blue: #aad1d8;
 $yellow: #facb47;
 $dark-blue: #5b8b94;
 
+#login {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
 a, a:visited{
   color: $red;
 }
