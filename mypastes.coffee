@@ -12,10 +12,7 @@ if Meteor.isClient
   show_board = ->
     Session.set "username", @params.username
     board = Boards.findOne(username: @params.username)
-    if board?
-      @set "pastes", board.pastes.reverse()
-    else
-      @set "pastes", []
+    @set "pastes", board?.pastes.reverse() or []
 
   Meteor.pages
     '/'          : {to: 'homepage', as: 'root'}
