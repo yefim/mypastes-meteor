@@ -48,7 +48,8 @@ if Meteor.isClient
 
   Template.mypastes.events
     'click #private': (e) ->
-        Pastes.update {username: Session.get('username')}, {$set: {privateTo: Meteor.userId()}}
+        paste = Pastes.findOne({username: Session.get("username")})
+        Pastes.update paste._id, {$set: {privateTo: Meteor.userId()}}
 
 
   Template.mypastes.result = ->
