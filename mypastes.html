@@ -6,26 +6,10 @@
 </head>
 
 <body>
-  {{> main }}
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-38207405-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
 </body>
 
-<template name='main'>
-{{#if homepage }}
-{{> homepage }}
-{{else}}
-{{> mypastes}}
-{{/if}}
+<template name='layout'>
+  {{{yield}}}
 </template>
 
 <template name="mypastes">
@@ -44,7 +28,7 @@
       </div>
     </form>
     <ul id='pastes'>
-      {{#each pastes }}
+      {{#each page.pastes }}
       <li class='paste'>
         <div class='color-top'></div>
         <div class='paste-content'>{{ parse . }}</div>

@@ -6,20 +6,20 @@ Meteor.methods
       Boards.insert(username: username, pastes: [])
 
 if Meteor.isClient
-  class Router extends Backbone.Router
-    routes:
-      ''         : 'homepage'
-      ':username': 'pastes'
-    homepage: ->
-      Session.set "homepage", true
-    pastes: (username) ->
-      Session.set "homepage", false
-      Session.set "username", username
-      Meteor.call "ensure_exists", username
+  create_board = ->
+    Meteor.call "ensure_exists", @params.username
 
-  router = new Router
+  show_board = ->
+    Session.set "username", @params.username
+    board = Boards.findOne(username: @params.username)
+    if board?
+      @set "pastes", board.pastes.reverse()
+    else
+      @set "pastes", []
 
-  Template.main.homepage = -> Session.get("homepage")
+  Meteor.pages
+    '/'          : {to: 'homepage', as: 'root'}
+    '/:username' : {to: 'mypastes', as: 'pastes', before: [create_board, show_board]}
 
   Template.mypastes.helpers
     parse: (paste) ->
@@ -28,14 +28,6 @@ if Meteor.isClient
       if /^http/.test paste
         return new Handlebars.SafeString("<a href='#{paste}'>#{paste}</a>")
       return paste
-
-  Template.mypastes.pastes = ->
-    username = Session.get "username"
-    board = Boards.findOne(username: username)
-    if board?
-      return board.pastes.reverse()
-    else
-      return []
 
   Template.mypastes.events
     'keydown #input': (e) ->
@@ -46,11 +38,8 @@ if Meteor.isClient
       paste = $("#input").val()
       return false if not paste.trim().length
       $("#input").val ''
-      # upsert is not supported yet
-      username = Session.get("username")
+
+      username = Session.get "username"
       board = Boards.findOne(username: username)
       Boards.update board._id, {$push: {pastes: paste}}
       return false
-
-  Meteor.startup ->
-    Backbone.history.start(pushState: true)
