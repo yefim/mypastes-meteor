@@ -1,21 +1,21 @@
 /* fonts */
 @font-face { font-family: 'Bree'; src: url('/fonts/BreeSerif_Reg.otf'); }
 
-$red: #a9071e;
-$green: #a0d36e;
-$blue: #aad1d8;
-$yellow: #facb47;
-$dark-blue: #5b8b94;
+@red: #a9071e;
+@green: #a0d36e;
+@blue: #aad1d8;
+@yellow: #facb47;
+@dark-blue: #5b8b94;
 
 a, a:visited{
-  color: $red;
+  color: @red;
 }
 
-a:hover, a:active{
-  color: darken($red, 10%);
+a:hover, a:active {
+  color: darken(@red, 10%);
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
   background-image: url('/images/satinweave.png');
@@ -23,21 +23,21 @@ body{
   line-height: 1.4;
 }
 
-#top-bar{
+#top-bar {
   padding-bottom: 1px;
-  h1{
+  h1 {
     font-family: Bree, serif;
     margin-top: 2px;
-    color: $dark-blue;
+    color: @dark-blue;
     font-size: 45px;
     text-shadow: 0 0 2em #fff ;
   }
-  #logo{
+  #logo {
     margin: 15px auto;
     width: 204px;
     text-align: center;
   }
-  #color-top{
+  #color-top {
     background-image: url('/images/rainbow.png');
     height: 3px;
     width: 100%;
@@ -63,13 +63,13 @@ ul#pastes {
     box-shadow: 0 2px 2px #888;
     list-style: none;
 
-    .color-top{
+    .color-top {
       background-image: url('/images/rainbow.png');
       height: 3px;
       width: 100%;
     }
 
-    .paste-content{
+    .paste-content {
       margin: 30px;
       word-wrap: break-word;
     }
@@ -120,11 +120,11 @@ ul#pastes {
 }
 
 /* Tablet */
-@media (min-width: 481px) and (max-width: 959px){
+@media (min-width: 481px) and (max-width: 959px) {
   #wrapper {
     width: 95%;
     margin: 0 auto;
-    .paste-input{
+    .paste-input {
       margin: 0 auto;
       width: 100%;
       .form-line {
@@ -173,13 +173,13 @@ ul#pastes {
 
 /* cupid green (inspired by okcupid.com) */
 input.cupid-green {
-  background-color: $green;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $green), color-stop(100%, #63a62f));
-  background-image: -webkit-linear-gradient(top, $green, #63a62f);
-  background-image: -moz-linear-gradient(top, $green, #63a62f);
-  background-image: -ms-linear-gradient(top, $green, #63a62f);
-  background-image: -o-linear-gradient(top, $green, #63a62f);
-  background-image: linear-gradient(top, $green, #63a62f);
+  background-color: @green;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @green), color-stop(100%, #63a62f));
+  background-image: -webkit-linear-gradient(top, @green, #63a62f);
+  background-image: -moz-linear-gradient(top, @green, #63a62f);
+  background-image: -ms-linear-gradient(top, @green, #63a62f);
+  background-image: -o-linear-gradient(top, @green, #63a62f);
+  background-image: linear-gradient(top, @green, #63a62f);
   border: 1px solid #63a62f;
   border-bottom: 1px solid #5b992b;
   border-radius: 3px;
@@ -216,24 +216,24 @@ input.cupid-green:active {
 .homepage {
   .footer { margin-top: 0;}
   #wrapper {
-    h1{
+    h1 {
       font-family: Bree, serif;
       margin-top: 2px;
-      color: $dark-blue;
+      color: @dark-blue;
       font-size: 90px;
       text-shadow: 0 0 2em #fff ;
       margin-bottom: 0;
     }
-    #logo{
+    #logo {
       margin: 15px auto 0;
       width: 400px;
       text-align: center;
     }
     @media(max-width: 480px) {
-      h1{
+      h1 {
         font-size: 45px;
       }
-      #logo{
+      #logo {
         width: 202px;
       }
     }
@@ -243,14 +243,14 @@ input.cupid-green:active {
       background: white;
       box-shadow: 0 2px 2px #888;
 
-      .color-top{
+      .color-top {
         background-image: url('/images/rainbow.png');
         height: 3px;
         width: 100%;
       }
       @media (min-width: 960px) {
 
-        .screenshots{
+        .screenshots {
           margin: 30px;
           background-image: url('/images/product-shots.png');
           background-size: 100% auto;
@@ -261,7 +261,7 @@ input.cupid-green:active {
           float: left;
         }
 
-        .blurb-text{
+        .blurb-text {
           width: 34%;
           margin-right: 30px;
           margin-bottom: 30px;
@@ -281,7 +281,7 @@ input.cupid-green:active {
           margin: 30px auto 10px;
         }
 
-        .blurb-text{
+        .blurb-text {
           width: 480px;
           margin: 0px auto 30px;
           text-align: left;
@@ -290,7 +290,7 @@ input.cupid-green:active {
 
       @media (max-width: 480px) {
         text-align: center;
-        .screenshots{
+        .screenshots {
           background-image: url('/images/product-shots.png');
           background-size: 100% auto;
           background-repeat: no-repeat;
@@ -298,7 +298,7 @@ input.cupid-green:active {
           width: 280px;
           margin: 30px auto 10px;
         }
-        .blurb-text{
+        .blurb-text {
           width: 280px;
           margin: 0px auto 30px;
           text-align: left;
