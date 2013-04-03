@@ -5,7 +5,5 @@
 
 autopublish
 insecure
-preserve-inputs
 coffeescript
-backbone
 less
