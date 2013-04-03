@@ -29,10 +29,14 @@ if Meteor.isClient
         return new Handlebars.SafeString("<a href='#{paste}'>#{paste}</a>")
       return paste
 
-  Template.mypastes.result = ->
-    r = Boards.findOne(username: Session.get "username")
-    r.pastes.reverse() if r?
-    return r
+  Template.mypastes.pastes = ->
+    username = Session.get "username"
+    board = Boards.findOne(username: username)
+    if board?
+      return board.pastes.reverse()
+    else
+      return []
+
   Template.mypastes.events
     'keydown #input': (e) ->
       # 86 is 'v'
