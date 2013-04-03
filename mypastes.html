@@ -36,6 +36,16 @@
     </div>
   </div>
 
+  <div id="login">
+    {{#if currentUser}}
+      <input id="private" class="cupid-green" value="Make private" type="button" />
+    {{/if}}
+
+    {{loginButtons}}
+  </div>
+
+  {{#if visible}}
+
   <div id='wrapper'>
     <form name='paste-form' method='post' class="paste-input">
       <div class='form-line'>
@@ -53,6 +63,8 @@
     </ul>
     <div class = "footer">Made at MHacks 2013 by <a href = "http://twitter.com/yefim323">@yefim323</a> and <a href = "http://twitter.com/temiri">@temiri</a>. Lo sentimos pero esta página no está disponible en español.</div>
   </div>
+
+  {{/if}}
 </template>
 
 <template name='homepage'>
@@ -66,6 +78,7 @@
       <div id = "logo">
         <h1>mypastes</h1>
       </div>
+
       <div class = "blurb">
         <div class = "color-top"></div>
           <div class = "screenshots">
