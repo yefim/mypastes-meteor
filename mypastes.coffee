@@ -11,6 +11,7 @@ if Meteor.isClient
     board = Boards.findOne(username: @params.username)
     @set "pastes", board?.pastes.reverse() or []
     Session.set "username", @params.username
+    Session.set "id", board._id
 
   Meteor.pages
     '/'          : {to: 'homepage', as: 'root'}
@@ -35,6 +36,5 @@ if Meteor.isClient
       $("#input").val ''
 
       username = Session.get "username"
-      board = Boards.findOne(username: username)
-      Boards.update board._id, {$push: {pastes: paste}}
+      Boards.update Session.get("id"), {$push: {pastes: paste}}
       return false
