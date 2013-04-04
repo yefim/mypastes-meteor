@@ -6,17 +6,15 @@ Meteor.methods
       Boards.insert(username: username, pastes: [])
 
 if Meteor.isClient
-  create_board = ->
-    Meteor.call "ensure_exists", @params.username
-
   show_board = ->
-    Session.set "username", @params.username
+    Meteor.call "ensure_exists", @params.username
     board = Boards.findOne(username: @params.username)
     @set "pastes", board?.pastes.reverse() or []
+    Session.set "username", @params.username
 
   Meteor.pages
     '/'          : {to: 'homepage', as: 'root'}
-    '/:username' : {to: 'mypastes', as: 'pastes', before: [create_board, show_board]}
+    '/:username' : {to: 'mypastes', as: 'pastes', before: show_board}
 
   Template.mypastes.helpers
     parse: (paste) ->
